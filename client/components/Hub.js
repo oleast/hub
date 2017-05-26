@@ -16,6 +16,7 @@ export default class Hub extends Component {
         super(props)
 
 		this.state = {
+			pageName: 'Hub',
 			accentColor: 'blue',
 			projects: [],
 			blogs: []
@@ -25,10 +26,11 @@ export default class Hub extends Component {
 	render () {
 		return (
 			<div id="main">
-				<Header />
-				<Divider />
+				<Header pageName={this.state.pageName}/>
 				<Notes headerColor={this.state.accentColor}/>
-				<Divider hidden />
+				<Container>
+					<Divider />
+				</Container>
 				<Projects headerColor={this.state.accentColor}/>
 				<Container>
 					<Divider />

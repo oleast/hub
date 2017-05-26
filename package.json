@@ -1,7 +1,7 @@
 {
-  "name": "cv",
-  "version": "0.0.1",
-  "description": "Simple React CV creation",
+  "name": "hub",
+  "version": "0.1.1",
+  "description": "Homepage hub",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oleast/cv.git"
+    "url": "git+https://github.com/oleast/hub.git"
   },
   "keywords": [
     "React",
@@ -20,15 +20,15 @@
     "js",
     "reactjs",
     "ReactJS",
-    "CV",
-    "cv"
+    "Hub",
+    "hub"
   ],
   "author": "oleast",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oleast/cv/issues"
+    "url": "https://github.com/oleast/hub/issues"
   },
-  "homepage": "https://github.com/oleast/cv#readme",
+  "homepage": "https://github.com/oleast/hub#readme",
   "dependencies": {
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",

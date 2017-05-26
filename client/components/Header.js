@@ -18,7 +18,7 @@ export default class Header extends Component {
         <Menu stackable>
             <Container>
             <Menu.Item>
-                <Icon disabled name='home' />
+                <Icon disabled name='home' /> {this.props.pageName}
             </Menu.Item>
             <Menu.Item
                 name='features'

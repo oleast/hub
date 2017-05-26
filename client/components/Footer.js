@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Button, Menu, Icon, Container } from 'semantic-ui-react'
+import { Button, Menu, Icon, Container, Grid, Segment, Divider } from 'semantic-ui-react'
 
 export default class Header extends Component {
 
@@ -16,19 +16,27 @@ export default class Header extends Component {
     const { activeItem } = this.state
 
     return (
-        <Menu stackable widths={3}>
+        <Segment basic inverted>
             <Container>
-            <Menu.Item>
-                Footer 1
-            </Menu.Item>
-            <Menu.Item>
-                Footer 2
-            </Menu.Item>
-            <Menu.Item>
-                Footer 3
-            </Menu.Item>
+                <Grid columns={3} relaxed>
+                    <Grid.Column>
+                        <Segment basic inverted>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                        </Segment>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Segment basic inverted>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                        </Segment>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Segment basic inverted>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
             </Container>
-        </Menu>
+        </Segment>
     )
   }
 }

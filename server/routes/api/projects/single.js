@@ -1,12 +1,12 @@
 
-const all = require('express').Router()
+const single = require('express').Router()
 
-all.get('/', (req, res) => {
+single.get('/:id', (req, res) => {
     res.send(
         [
             {
                 name: 'Viestinta',
-                id: '1',
+                id: req.params.id,
                 picture: 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder-300x300.png',
                 url: 'https://viestinta.eu',
                 repo: 'https://github.com/Viestinta/viestinta',
@@ -16,17 +16,9 @@ all.get('/', (req, res) => {
                 
                 Students and lectureres log in with their university credentials trough FEIDE. 
                 With the use of React, websockets and a Expressjs backend Viestinta delivers an interactive experience`
-            }, {
-                name: 'Band Ordering System',
-                id: '3',
-                picture: 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder-300x300.png',
-                url: 'https://samfundet.stokkers.no',
-                repo: 'https://github.com/oleast/it1901',
-                tags: ['Nodejs', 'Expressjs', 'JQuery', 'Bootstrap', 'MongoDB'],
-                description: "<image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />"
             }
         ]
     )
 })
 
-module.exports = all
+module.exports = single

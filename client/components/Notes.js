@@ -13,17 +13,7 @@ export default class Notes extends Component {
         this.state = {
             renderMode: props.renderMode || 'latest',
             headerColor: props.headerColor || 'black',
-            notes: [
-                {
-                    name: 'Why i made this page',
-                    id: '6',
-                    date: "2016-05-25",
-                    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-                }
-            ]
+            notes: []
         }
 
         this.getNotes = this.getNotes.bind(this)
@@ -35,11 +25,11 @@ export default class Notes extends Component {
 
     getNotes() {
         axios
-			.get('/api/notes/' + this.state.rederMode)
+			.get('/api/notes/' + this.state.renderMode)
 			.then(request => {
                 console.log(request.data)
 				this.setState({
-                    projects: request.data
+                    notes: request.data
                 })
         	})
 			.catch(err => {
@@ -53,7 +43,7 @@ export default class Notes extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Header color={this.state.headerColor} as='h1'>Latest Note</Header>
-                    {this.state.notes.map((note) => <Note note={note}/>)}
+                    {this.state.notes.map((note) => <Note key={note.id} note={note}/>)}
                 </Container>
                 <Divider hidden/>
             </div>

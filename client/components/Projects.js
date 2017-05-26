@@ -13,19 +13,7 @@ export default class Projects extends Component {
         this.state = {
             renderMode: props.renderMode || 'featured',
             headerColor: props.headerColor || 'black',
-            projects: [
-                {
-                    name: 'Viestinta',
-                    id: '1',
-                    picture: 'https://media.stuff.org/bilde.jpg',
-                    url: 'https://viestinta.eu'
-                }, {
-                    name: 'Band Ordering System',
-                    id: '3',
-                    picture: 'https://media.stuff.org/bilde.jpg',
-                    url: 'https://samfundet.stokkers.no'
-                }
-            ]
+            projects: []
         }
 
         this.getProjects = this.getProjects.bind(this)
@@ -37,7 +25,7 @@ export default class Projects extends Component {
 
     getProjects() {
         axios
-			.get('/api/projects/' + this.state.rederMode)
+			.get('/api/projects/' + this.state.renderMode)
 			.then(request => {
                 console.log(request.data)
 				this.setState({
@@ -55,7 +43,7 @@ export default class Projects extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Header color={this.state.headerColor} as='h1'>Featured Projects</Header>
-                    {this.state.projects.map((project) => <Project project={project}/>)}
+                    {this.state.projects.map((project) => <Project key={project.id} project={project}/>)}
                 </Container>
                 <Divider hidden/>
             </div>

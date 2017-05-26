@@ -13,15 +13,7 @@ export default class Blogs extends Component {
         this.state = {
             renderMode: props.renderMode || 'featured',
             headerColor: props.headerColor || 'black',
-            blogs: [{ 
-                name: 'Introduction to linux on microwaves',
-                id: '1',
-                picture: 'https://media.stuff.org/bilde.jpg',
-            }, {
-                name: 'How to set up docker on a toaster',
-                id: '3',
-                picture: 'https://media.stuff.org/bilde.jpg',
-            }]
+            blogs: []
         }
 
         this.getProjects = this.getProjects.bind(this)
@@ -51,7 +43,7 @@ export default class Blogs extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Header color={this.state.headerColor} as='h1'>Featured Blogs</Header>
-                    {this.state.blogs.map((blog) => <Blog blog={blog}/>)}
+                    {this.state.blogs.map((blog) => <Blog key={blog.id} blog={blog}/>)}
                 </Container>
                 <Divider hidden/>
             </div>

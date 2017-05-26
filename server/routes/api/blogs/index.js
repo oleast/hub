@@ -1,26 +1,15 @@
 
-const api = require('express').Router()
+const blogs = require('express').Router()
 
-api.get('/all', (req, res) => {
-    res.send([
-        { 
-            name: 'Introduction to linux on microwaves',
-            id: '1',
-            picture: 'https://media.stuff.org/bilde.jpg',
-        }, {
-            name: 'How to set up docker on a toaster',
-            id: '3',
-            picture: 'https://media.stuff.org/bilde.jpg',
-        }
-    ])
+const all = require('./all')
+const featured = require('./featured')
+const single = require('./single')
+
+blogs.get('/', (req, res) => {
+    res.send({hello: 'blogs'})
 })
+blogs.use('/all', all)
+blogs.use('/featured', featured)
+blogs.use('/single', single)
 
-api.get('/', (req, res) => {
-    res.send({
-        name: 'Project1',
-        id: req.id,
-        picture: 'https://media.stuff.org/bilde.jpg'
-    })
-})
-
-module.exports = api
+module.exports = blogs
