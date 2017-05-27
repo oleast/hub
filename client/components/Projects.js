@@ -44,9 +44,9 @@ export default class Projects extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Header color={this.state.accentColor} as='h1'>Featured Projects 
-                        <ProjectModal accentColor={this.state.accentColor}/>
+                        <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} />
                     </Header>
-                    {this.state.projects.map((project) => <Project key={project._id} project={project}/>)}
+                    {this.state.projects.map((project) => <Project key={project._id} project={project} getProjects={this.getProjects}/>)}
                 </Container>
                 <Divider hidden/>
             </div>

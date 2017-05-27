@@ -46,7 +46,7 @@ export default class Blogs extends Component {
                     <Header color={this.state.accentColor} as='h1'>Featured Blogs
                         <BlogModal accentColor={this.state.accentColor}/>
                     </Header>
-                    {this.state.blogs.map((blog) => <Blog key={blog.id} blog={blog}/>)}
+                    {this.state.blogs.map((blog) => <Blog key={blog._id} blog={blog}/>)}
                 </Container>
                 <Divider hidden/>
             </div>

@@ -46,7 +46,6 @@ export default class BlogModal extends Component {
     handleSubmit (event) {
         event.preventDefault()
         let form = this.state.form
-        form.tags = form.tags.split(',')
         axios.post('/api/blogs/create/', form)
         this.handleClose()
     }

@@ -22,8 +22,6 @@ export default class ProjectModal extends Component {
         this.handleClose = this.handleClose.bind(this)
     }
 
-    //handleChange = (event, { name, value }) => this.setState({ [name]: value })
-
     handleCheckbox (event, {name, checked}) {
         console.log('toggle ' + name + ' to ' + checked)
         let form = this.state.form
@@ -50,6 +48,7 @@ export default class ProjectModal extends Component {
         let form = this.state.form
         form.tags = form.tags.split(',')
         axios.post('/api/projects/create/', form)
+        this.props.getProjects()
         this.handleClose()
     }
 

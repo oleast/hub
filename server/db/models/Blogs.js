@@ -8,7 +8,7 @@ console.log('Hello from blogs start')
 const Blog = new Schema (
 	{
 		title: { type: String, required: true , unique: true },
-		image: { type: String, default: 'https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' },
+		image: { type: String, default: 'https://d30y9cdsu7xlg0.cloudfront.net/png/9464-200.png' },
 		content: { type: String, required: true },
 		featured: { type: Boolean, default: true },
 		updated: { type: Date, default: Date.now },
@@ -18,4 +18,4 @@ const Blog = new Schema (
 
 console.log('Hello from blogs end')
 
-module.exports = mongoose.model('BlogD', Blog)
+module.exports = mongoose.model('Blog', Blog)

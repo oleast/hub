@@ -3,7 +3,7 @@ let mongoose = require('mongoose')
 
 let Schema = mongoose.Schema
 
-Blog = new Schema (
+Note = new Schema (
 	{
 		title: { type: String, required: true , unique: true },
 		image: { type: String, default: 'https://openclipart.org/download/247324/abstract-user-flat-1.svg' },
@@ -13,6 +13,6 @@ Blog = new Schema (
 	}
 )
 
-let BlogModel = mongoose.model('Blog', Blog)
+let NoteModel = mongoose.model('Note', Note)
 
-module.exports = BlogModel
+module.exports = NoteModel

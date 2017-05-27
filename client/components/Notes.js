@@ -46,7 +46,7 @@ export default class Notes extends Component {
                     <Header color={this.state.accentColor} as='h1'>Latest Note
                         <NoteModal accentColor={this.state.accentColor}/>
                     </Header>
-                    {this.state.notes.map((note) => <Note key={note.id} note={note}/>)}
+                    {this.state.notes.map((note) => <Note key={note._id} note={note}/>)}
                 </Container>
                 <Divider hidden/>
             </div>
