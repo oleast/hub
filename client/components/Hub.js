@@ -27,15 +27,15 @@ export default class Hub extends Component {
 		return (
 			<div id="main">
 				<Header pageName={this.state.pageName}/>
-				<Notes headerColor={this.state.accentColor}/>
+				<Notes accentColor={this.state.accentColor}/>
 				<Container>
 					<Divider />
 				</Container>
-				<Projects headerColor={this.state.accentColor}/>
+				<Projects accentColor={this.state.accentColor}/>
 				<Container>
 					<Divider />
 				</Container>
-				<Blogs headerColor={this.state.accentColor}/>
+				<Blogs accentColor={this.state.accentColor}/>
 				<Divider hidden />
 				<Footer />
 			</div>

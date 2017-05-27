@@ -16,6 +16,11 @@ const path = require('path')
 global.logger = require('winston')
 global.appRoot = path.resolve(__dirname)
 
+const models = require('./db/models')
+global.Blog = models.blogs
+global.Project = models.projects
+global.Note = models.notes
+
 const routes = require('./routes')
 
 // ///////////////////////////////////////////////////
@@ -23,6 +28,7 @@ const routes = require('./routes')
 // ///////////////////////////////////////////////////
 
 const PORT = process.env.HUB_PORT || 8000
+const HOST = process.env.HUB_HOST || '0.0.0.0'
 const LOG_LEVEL = process.env.HUB_LOG_LEVEL || 'debug'
 
 // ///////////////////////////////////////////////////
@@ -46,7 +52,7 @@ app.use('/', routes)
 
 const db = require('./db')
 
-app.listen(PORT, () => logger.info('Hub server running on port ' + PORT))
+let server = app.listen(PORT, HOST, () => logger.info('Hub server running on: ' + HOST + ':' + PORT))
 
 // ///////////////////////////////////////////////////
 // End of file

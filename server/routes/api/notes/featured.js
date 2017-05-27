@@ -1,7 +1,19 @@
 
-const features = require('express').Router()
+const featured = require('express').Router()
 
-features.get('/', (req, res) => {
+featured.get('/', (req, res) => {
+    Note.find()
+        .exec()
+        .then((notes) => {
+            res.send(notes)
+        })
+        .catch((err) => {
+            logger.error(err)
+            res.status(404).send()
+        })
+})
+
+/*featured.get('/', (req, res) => {
     res.send(
         [
             {
@@ -15,6 +27,6 @@ features.get('/', (req, res) => {
             }
         ]
     )
-})
+})*/
 
-module.exports = features
+module.exports = featured

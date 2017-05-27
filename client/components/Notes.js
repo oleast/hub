@@ -4,6 +4,7 @@ import { Segment, Container, Header, Divider } from 'semantic-ui-react'
 import axios from 'axios'
 
 import Note from './Note'
+import NoteModal from './NoteModal'
 
 export default class Notes extends Component {
 
@@ -12,7 +13,7 @@ export default class Notes extends Component {
 
         this.state = {
             renderMode: props.renderMode || 'latest',
-            headerColor: props.headerColor || 'black',
+            accentColor: props.accentColor || 'black',
             notes: []
         }
 
@@ -42,7 +43,9 @@ export default class Notes extends Component {
             <div id="notes">
                 <Divider hidden/>
                 <Container text>
-                    <Header color={this.state.headerColor} as='h1'>Latest Note</Header>
+                    <Header color={this.state.accentColor} as='h1'>Latest Note
+                        <NoteModal accentColor={this.state.accentColor}/>
+                    </Header>
                     {this.state.notes.map((note) => <Note key={note.id} note={note}/>)}
                 </Container>
                 <Divider hidden/>

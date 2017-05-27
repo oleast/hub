@@ -13,7 +13,7 @@ export default class Projects extends Component {
 
         this.state = {
             renderMode: props.renderMode || 'featured',
-            accentColor: props.headerColor || 'black',
+            accentColor: props.accentColor || 'black',
             projects: []
         }
 
@@ -46,7 +46,7 @@ export default class Projects extends Component {
                     <Header color={this.state.accentColor} as='h1'>Featured Projects 
                         <ProjectModal accentColor={this.state.accentColor}/>
                     </Header>
-                    {this.state.projects.map((project) => <Project key={project.id} project={project}/>)}
+                    {this.state.projects.map((project) => <Project key={project._id} project={project}/>)}
                 </Container>
                 <Divider hidden/>
             </div>

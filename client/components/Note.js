@@ -12,13 +12,13 @@ export default class Blog extends Component {
         return (
             <Item.Group>
                 <Item>
-                    <Item.Image size='tiny' src='https://openclipart.org/download/247324/abstract-user-flat-1.svg' />
+                    <Item.Image size='tiny' src={this.props.note.image} />
 
                     <Item.Content>
                         <Item.Header as='a'>{this.props.note.name}</Item.Header>
                         <Item.Meta>{this.props.note.date.getFormattedDate()}</Item.Meta>
                         <Item.Description>
-                            {this.props.note.text}
+                            {this.props.note.content}
                         </Item.Description>
                         <Item.Extra></Item.Extra>
                     </Item.Content>

@@ -2,6 +2,18 @@
 const latest = require('express').Router()
 
 latest.get('/', (req, res) => {
+    Note.find()
+        .exec()
+        .then((note) => {
+            res.send([note.sort((p, q) => q.date - p.date)[0]])
+        })
+        .catch((err) => {
+            logger.error(err)
+            res.status(404).send()
+        })
+})
+
+/*latest.get('/', (req, res) => {
     res.send(
         [
             {
@@ -15,6 +27,6 @@ latest.get('/', (req, res) => {
             }
         ]
     )
-})
+})*/
 
 module.exports = latest

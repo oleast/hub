@@ -4,6 +4,7 @@ import { Segment, Container, Header, Divider } from 'semantic-ui-react'
 import axios from 'axios'
 
 import Blog from './Blog'
+import BlogModal from './BlogModal'
 
 export default class Blogs extends Component {
 
@@ -12,7 +13,7 @@ export default class Blogs extends Component {
 
         this.state = {
             renderMode: props.renderMode || 'featured',
-            headerColor: props.headerColor || 'black',
+            accentColor: props.accentColor || 'black',
             blogs: []
         }
 
@@ -42,7 +43,9 @@ export default class Blogs extends Component {
             <div id="projects">
                 <Divider hidden/>
                 <Container text>
-                    <Header color={this.state.headerColor} as='h1'>Featured Blogs</Header>
+                    <Header color={this.state.accentColor} as='h1'>Featured Blogs
+                        <BlogModal accentColor={this.state.accentColor}/>
+                    </Header>
                     {this.state.blogs.map((blog) => <Blog key={blog.id} blog={blog}/>)}
                 </Container>
                 <Divider hidden/>

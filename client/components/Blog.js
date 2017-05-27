@@ -13,13 +13,13 @@ export default class Blog extends Component {
         return (
             <Item.Group>
                 <Item>
-                    <Item.Image size='tiny' src={this.props.blog.picture} />
+                    <Item.Image size='tiny' src={this.props.blog.image} />
 
                     <Item.Content>
-                        <Item.Header as='a'>{this.props.blog.name}</Item.Header>
+                        <Item.Header as='a'>{this.props.blog.title}</Item.Header>
                         <Item.Meta>{this.props.blog.date.getFormattedDate()}</Item.Meta>
                         <Item.Description>
-                            <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+                            {this.props.blog.content}
                         </Item.Description>
                         <Item.Extra></Item.Extra>
                     </Item.Content>

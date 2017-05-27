@@ -3,39 +3,155 @@ import { Header, Image, Modal, Icon, Button, Checkbox, Form, Input, Radio, Selec
 
 import axios from 'axios'
 
-const options = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
-]
-
-export default class  extends Component {
+export default class ProjectModal extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            accentColor: props.accentColor || 'standard'
+            accentColor: props.accentColor || 'standard',
+            form: {
+                featured: true,
+            }
         }
+        
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleCheckbox = this.handleCheckbox.bind(this)
+        this.handleOpen = this.handleOpen.bind(this)
+        this.handleClose = this.handleClose.bind(this)
+    }
+
+    //handleChange = (event, { name, value }) => this.setState({ [name]: value })
+
+    handleCheckbox (event, {name, checked}) {
+        console.log('toggle ' + name + ' to ' + checked)
+        let form = this.state.form
+        form[name] = checked
+        console.log(form)
+        this.setState({
+            form: form
+        })
+    }
+
+    handleChange (event, {name, value}) {
+        console.log([name] + ' - ' + name + ' : ' + value)
+        if (value === '') { value = undefined }
+        let form = this.state.form
+        form[name] = value
+        console.log(form)
+        this.setState({
+            form: form
+        })
+    }
+
+    handleSubmit (event) {
+        event.preventDefault()
+        let form = this.state.form
+        form.tags = form.tags.split(',')
+        axios.post('/api/projects/create/', form)
+        this.handleClose()
+    }
+
+    handleOpen (e) {
+        this.setState({
+            modalOpen: true
+        })
+    }
+
+    handleClose (e) {
+        this.setState({
+            modalOpen: false
+        })
     }
 
     render() {
+        const { name, image, source, tags, description, featured, url } = this.state
+
         return (
-            <Modal trigger={<Button floated='right' color={this.state.accentColor}><h3>+</h3></Button>}>
+            <Modal 
+                open={this.state.modalOpen}
+                onClose={this.handeClose}
+                closeOnDimmerClick={true}
+                trigger={
+                    <Button
+                        floated='right'
+                        color={this.state.accentColor}
+                        onClick={this.handleOpen}>
+                        <h3>+</h3>
+                    </Button>
+                }>
                 <Modal.Header>Create a Project</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
-                        <Form>
+                        <Form onSubmit={this.handleSubmit}>
                             <Form.Group widths='equal'>
-                                <Form.Field control={Input} name='name' label='Name' placeholder='Project name...' />
-                                <Form.Field control={Input} name='image' label='Image' placeholder='Project Image URL' />
+                                <Form.Field>
+                                    <Form.Input
+                                        label='Name'
+                                        name='name'
+                                        placeholder='Project name...'
+                                        value={name}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <Form.Input
+                                        label='Image'
+                                        name='image'
+                                        placeholder='Project image URL...'
+                                        value={image}
+                                        onChange={this.handleChange}
+                                    />
+                                </Form.Field>
                             </Form.Group>
                             <Form.Group widths='equal'>
-                                <Form.Field control={Input} name='git' label='Git' placeholder='Git Repository URL' />
-                                <Form.Field control={Input} tags='tags' label='Tags' placeholder='Tags Corresponding To This Project' />
+                                <Form.Field>
+                                    <Form.Input
+                                        label='Source Code'
+                                        name='source'
+                                        placeholder='Link to source code...'
+                                        value={source}
+                                        onChange={this.handleChange}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <Form.Input
+                                        label='Url'
+                                        name='url'
+                                        placeholder='Project URL...'
+                                        value={url}
+                                        onChange={this.handleChange}
+                                    />
+                                </Form.Field>
                             </Form.Group>
-                            <Form.Field control={TextArea} label='Description' placeholder='Tell us more about you...' />
-                            <Form.Field control={Checkbox} label='Featured' />
-                            <Form.Field control={Button}>Submit</Form.Field>
+                            <Form.Field>
+                                <Form.Input
+                                    label='Tags'
+                                    name='tags'
+                                    placeholder='Tags corresponding to this project...'
+                                    value={tags}
+                                    onChange={this.handleChange}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <TextArea
+                                    name='description'
+                                    label='Description'
+                                    placeholder='Description of the project, its purpose and technologies...'
+                                    value={description}
+                                    onChange={this.handleChange}
+                                    required
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <Checkbox label='Featured' name='featured' onChange={this.handleCheckbox} defaultChecked />
+                            </Form.Field>
+                            <Form.Field>
+                                <Button color={this.state.accentColor}>Submit</Button>
+                                <Button color='red' floated='right' onClick={this.handleClose}>Close</Button>
+                            </Form.Field>
                         </Form>
                     </Modal.Description>
                 </Modal.Content>

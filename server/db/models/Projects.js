@@ -6,10 +6,10 @@ let Schema = mongoose.Schema
 
 Project = new Schema (
 	{
-		name: { type: String, required: true },
-		picture: { type: String, default: 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder-300x300.png' },
+		name: { type: String, required: true , unique: true },
+		image: { type: String, default: 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder-300x300.png' },
 		url: String,
-		repo: String,
+		source: String,
 		tags: [String],
 		description: { type: String, required: true },
 		featured: { type: Boolean, default: true },
