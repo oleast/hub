@@ -1,13 +1,13 @@
 
-const all = require('express').Router()
+const latest = require('express').Router()
 
 const Project = require.main.require('./db/models').projects
 
-all.get('/', (req, res) => {
+latest.get('/', (req, res) => {
     Project.find()
         .exec()
         .then((project) => {
-            res.send(project)
+            res.send([project.sort((p, q) => q.date - p.date)[0]])
         })
         .catch((err) => {
             logger.error(err)
@@ -15,4 +15,4 @@ all.get('/', (req, res) => {
         })
 })
 
-module.exports = all
+module.exports = latest

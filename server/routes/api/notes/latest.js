@@ -1,7 +1,7 @@
 
-const featured = require('express').Router()
+const latest = require('express').Router()
 
-featured.get('/', (req, res) => {
+latest.get('/', (req, res) => {
     res.send(
         [
             {
@@ -17,4 +17,4 @@ featured.get('/', (req, res) => {
     )
 })
 
-module.exports = featured
+module.exports = latest

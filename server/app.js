@@ -11,8 +11,10 @@ const express = require('express')
 const bodyparser = require('body-parser')
 const cookieparser = require('cookie-parser')
 const session = require('express-session')
-const logger = require('winston')
 const path = require('path')
+
+global.logger = require('winston')
+global.appRoot = path.resolve(__dirname)
 
 const routes = require('./routes')
 
@@ -41,6 +43,8 @@ app.use(express.static('public'))
 logger.level = LOG_LEVEL
 
 app.use('/', routes)
+
+const db = require('./db')
 
 app.listen(PORT, () => logger.info('Hub server running on port ' + PORT))
 

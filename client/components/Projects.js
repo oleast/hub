@@ -4,6 +4,7 @@ import { Segment, Container, Header, Divider } from 'semantic-ui-react'
 import axios from 'axios'
 
 import Project from './Project'
+import ProjectModal from './ProjectModal'
 
 export default class Projects extends Component {
 
@@ -12,7 +13,7 @@ export default class Projects extends Component {
 
         this.state = {
             renderMode: props.renderMode || 'featured',
-            headerColor: props.headerColor || 'black',
+            accentColor: props.headerColor || 'black',
             projects: []
         }
 
@@ -42,7 +43,9 @@ export default class Projects extends Component {
             <div id="projects">
                 <Divider hidden/>
                 <Container text>
-                    <Header color={this.state.headerColor} as='h1'>Featured Projects</Header>
+                    <Header color={this.state.accentColor} as='h1'>Featured Projects 
+                        <ProjectModal accentColor={this.state.accentColor}/>
+                    </Header>
                     {this.state.projects.map((project) => <Project key={project.id} project={project}/>)}
                 </Container>
                 <Divider hidden/>
