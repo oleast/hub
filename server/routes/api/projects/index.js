@@ -5,6 +5,7 @@ const featured = require('./featured')
 const create = require('./create')
 const latest = require('./latest')
 const del = require('./delete')
+const feature = require('./feature')
 
 projects.get('/', (req, res) => {
     res.send({hello: 'projects'})
@@ -14,5 +15,6 @@ projects.use('/featured', featured)
 projects.use('/create', create)
 projects.use('/latest', latest)
 projects.use('/delete', del)
+projects.use('/feature', feature)
 
 module.exports = projects

@@ -9,7 +9,7 @@ export default class ProjectModal extends Component {
         super(props)
 
         this.state = {
-            accentColor: props.accentColor || 'standard',
+            accentColor: props.accentColor || undefined,
             form: {
                 featured: true,
             }
@@ -71,15 +71,8 @@ export default class ProjectModal extends Component {
             <Modal 
                 open={this.state.modalOpen}
                 onClose={this.handeClose}
-                closeOnDimmerClick={true}
-                trigger={
-                    <Button
-                        floated='right'
-                        color={this.state.accentColor}
-                        onClick={this.handleOpen}>
-                        <h3>+</h3>
-                    </Button>
-                }>
+                closeOnDimmerClick
+                trigger={this.props.trigger}>
                 <Modal.Header>Create a Project</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
