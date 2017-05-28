@@ -62,7 +62,7 @@ export default class Notes extends Component {
                 <Container text>
                     <Grid>
                         <Grid.Column width={12}>
-                            <Header color={this.state.accentColor} as='h1'>Featured Notes </Header>
+                            <Header color={this.state.accentColor} as='h1'>Latest Notes </Header>
                         </Grid.Column>
                         <Grid.Column width={3} floated='right'>
                             <Dropdown

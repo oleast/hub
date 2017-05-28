@@ -38,7 +38,7 @@ export default class Blog extends Component {
                     <Item.Image size='tiny' src={this.props.obj.image} />
 
                     <Item.Content>
-                        <Item.Header as='a'>{this.props.obj.name}</Item.Header>
+                        <Item.Header as='a'>{this.props.obj.title}</Item.Header>
                         <Item.Meta>
                             <Icon size='large' name='settings' onClick={this.toggleShowOptions}/>
                             {this.props.obj.date.getFormattedDate()}
