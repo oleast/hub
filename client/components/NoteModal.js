@@ -9,7 +9,7 @@ export default class NoteModal extends Component {
         super(props)
 
         this.state = {
-            accentColor: props.accentColor || 'standard',
+            accentColor: props.accentColor || undefined,
             form: {}
         }
         
@@ -34,6 +34,7 @@ export default class NoteModal extends Component {
         event.preventDefault()
         let form = this.state.form
         axios.post('/api/notes/create/', form)
+        this.props.getObj()
         this.handleClose()
     }
 
@@ -56,16 +57,10 @@ export default class NoteModal extends Component {
             <Modal 
                 open={this.state.modalOpen}
                 onClose={this.handeClose}
-                closeOnDimmerClick={true}
-                trigger={
-                    <Button
-                        floated='right'
-                        color={this.state.accentColor}
-                        onClick={this.handleOpen}>
-                        <h3>+</h3>
-                    </Button>
-                }>
-                <Modal.Header>Create a Project</Modal.Header>
+                closeOnDimmerClick
+                closeIcon='close'
+                trigger={this.props.trigger}>
+                <Modal.Header>Create a Note</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
                         <Form onSubmit={this.handleSubmit}>
@@ -84,7 +79,7 @@ export default class NoteModal extends Component {
                                     <Form.Input
                                         label='Image'
                                         name='image'
-                                        placeholder='Not image URL...'
+                                        placeholder='Note image URL...'
                                         value={image}
                                         onChange={this.handleChange}
                                     />
@@ -102,7 +97,6 @@ export default class NoteModal extends Component {
                             </Form.Field>
                             <Form.Field>
                                 <Button color={this.state.accentColor}>Submit</Button>
-                                <Button color='red' floated='right' onClick={this.handleClose}>Close</Button>
                             </Form.Field>
                         </Form>
                     </Modal.Description>
@@ -110,4 +104,4 @@ export default class NoteModal extends Component {
             </Modal>
         )
     }
-}
+} 

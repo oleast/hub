@@ -13,14 +13,13 @@ export default class Project extends Component {
 
         this.state = {
             showOptions: false,
-            showEditModal: false
+            accentColor: props.accentColor
         }
 
         this.deleteItem = this.deleteItem.bind(this)
         this.toggleShowOptions = this.toggleShowOptions.bind(this)
         this.feature = this.feature.bind(this)
         this.unFeature = this.unFeature.bind(this)
-        //this.toggleShowEditModal = toggleShowEditModal.bind(this)
     }
 
     deleteItem () {
@@ -50,13 +49,11 @@ export default class Project extends Component {
                 <Item>
                     <Item.Image size='tiny' src={this.props.project.image} />
                     <Item.Content>
-                        <Item.Header as='a'>
-                            {this.props.project.name}
-                        </Item.Header>
+                        <Item.Header as='a'>{this.props.project.name}</Item.Header>
                         <Item.Meta>
                             <Icon size='large' name='settings' onClick={this.toggleShowOptions}/>
-                            {this.props.project.source ? <a href={this.props.project.source}><Icon size='large' name='github'/></a> : "This projects' source code is not available"}
-                            {this.props.project.url ? <a href={this.props.project.url}>{this.props.project.url.replace('https://', '').replace('http://', '')}</a> : 'This project does not have its own web page'}
+                            {this.props.project.source ? <a href={this.props.project.source}><Icon size='large' name='github'/></a> : ''}
+                            {this.props.project.url ? <a href={this.props.project.url}>{this.props.project.url.replace('https://', '').replace('http://', '')}</a> : ''}
                         </Item.Meta>
                         <Item.Description>
                             {this.props.project.description}

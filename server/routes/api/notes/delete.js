@@ -3,9 +3,9 @@ module.exports = require('express')
     .Router()
     .post('/', (req, res) => {
         console.log('Recieveing body: ' + JSON.stringify(req.body))
-        Project.remove({ _id:req.body.id })
-            .then((project) => (err, project) => {
-                logger.log('Deleted Project: ' + project.name)
+        Note.remove({ _id:req.body.id })
+            .then((note) => {
+                logger.log('Deleted Note: ' + note.title)
                 res.end()
             })
             .catch((err) => {
@@ -13,3 +13,4 @@ module.exports = require('express')
                 res.status(404).send()
             })
     })
+ 

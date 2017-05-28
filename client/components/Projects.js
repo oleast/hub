@@ -19,8 +19,8 @@ export default class Projects extends Component {
 
         this.state = {
             renderMode: props.renderMode || 'featured',
-            accentColor: props.accentColor || 'black',
-            apiSelected: apiMethods[0].value,
+            accentColor: props.accentColor || undefined,
+            apiSelected: props.renderMode || 'featured',
             projects: []
         }
 
@@ -62,18 +62,33 @@ export default class Projects extends Component {
                 <Container text>
                     <Grid>
                         <Grid.Column width={12}>
-                            <Header color={this.state.accentColor} as='h1'>{this.state.apiSelected.text} Projects </Header>
+                            <Header color={this.state.accentColor} as='h1'>Featured Projects</Header>
+                        </Grid.Column>
+                        <Grid.Column width={3} floated='right'>
+                            <Dropdown
+                                icon='exchange'
+                                labeled
+                                button
+                                className='icon'
+                                options={apiMethods}
+                                onChange={this.setApiMethod}
+                                value={this.state.apiSelected.value
+                            }/>
                         </Grid.Column>
                         <Grid.Column width={1} floated='right'>
                             <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={
                                 <Icon size='large' name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
                             }/>
                         </Grid.Column>
-                        <Grid.Column width={3} floated='right'>
-                            <Dropdown icon='exchange' labeled button className='icon' options={apiMethods} onChange={this.setApiMethod} value={this.state.apiSelected.value}/>
-                        </Grid.Column>
                     </Grid>
-                    {this.state.projects.map((project) => <Project key={project._id} project={project} getProjects={this.getProjects} accentColor={this.state.accentColor}/>)}
+                    {this.state.projects.map((project) => 
+                        <Project
+                            key={project._id}
+                            project={project}
+                            getProjects={this.getProjects}
+                            accentColor={this.state.accentColor}
+                        />
+                    )}
                 </Container>
                 <Divider hidden/>
             </div>

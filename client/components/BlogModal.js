@@ -9,7 +9,7 @@ export default class BlogModal extends Component {
         super(props)
 
         this.state = {
-            accentColor: props.accentColor || 'standard',
+            accentColor: props.accentColor || undefined,
             form: {
                 featured: true,
             }
@@ -47,38 +47,33 @@ export default class BlogModal extends Component {
         event.preventDefault()
         let form = this.state.form
         axios.post('/api/blogs/create/', form)
+        this.props.getObj()
         this.handleClose()
     }
 
-    handleOpen (e) {
+    handleOpen (event) {
         this.setState({
             modalOpen: true
         })
     }
 
-    handleClose (e) {
+    handleClose (event) {
         this.setState({
             modalOpen: false
         })
     }
 
-    render() {
+    render () {
         const { title, image, content, featured } = this.state
 
         return (
             <Modal 
                 open={this.state.modalOpen}
                 onClose={this.handeClose}
-                closeOnDimmerClick={true}
-                trigger={
-                    <Button
-                        floated='right'
-                        color={this.state.accentColor}
-                        onClick={this.handleOpen}>
-                        <h3>+</h3>
-                    </Button>
-                }>
-                <Modal.Header>Create a Project</Modal.Header>
+                closeOnDimmerClick
+                closeIcon='close'
+                trigger={this.props.trigger}>
+                <Modal.Header>Create a Blog</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
                         <Form onSubmit={this.handleSubmit}>
@@ -118,7 +113,6 @@ export default class BlogModal extends Component {
                             </Form.Field>
                             <Form.Field>
                                 <Button color={this.state.accentColor}>Submit</Button>
-                                <Button color='red' floated='right' onClick={this.handleClose}>Close</Button>
                             </Form.Field>
                         </Form>
                     </Modal.Description>

@@ -46,25 +46,25 @@ export default class ProjectModal extends Component {
     handleSubmit (event) {
         event.preventDefault()
         let form = this.state.form
-        form.tags = form.tags.split(',')
+        if (form.tags) { form.tags = form.tags.split(',') }
         axios.post('/api/projects/create/', form)
         this.props.getProjects()
         this.handleClose()
     }
 
-    handleOpen (e) {
+    handleOpen (event) {
         this.setState({
             modalOpen: true
         })
     }
 
-    handleClose (e) {
+    handleClose (event) {
         this.setState({
             modalOpen: false
         })
     }
 
-    render() {
+    render () {
         const { name, image, source, tags, description, featured, url } = this.state
 
         return (
@@ -72,6 +72,7 @@ export default class ProjectModal extends Component {
                 open={this.state.modalOpen}
                 onClose={this.handeClose}
                 closeOnDimmerClick
+                closeIcon='close'
                 trigger={this.props.trigger}>
                 <Modal.Header>Create a Project</Modal.Header>
                 <Modal.Content>
@@ -142,7 +143,7 @@ export default class ProjectModal extends Component {
                             </Form.Field>
                             <Form.Field>
                                 <Button color={this.state.accentColor}>Submit</Button>
-                                <Button color='red' floated='right' onClick={this.handleClose}>Close</Button>
+                                {/*<Button color='red' floated='right' onClick={this.handleClose}>Close</Button>*/}
                             </Form.Field>
                         </Form>
                     </Modal.Description>

@@ -1,18 +1,14 @@
 
-const latest = require('express').Router()
-
-const Project = require.main.require('./db/models').projects
-
-latest.get('/', (req, res) => {
-    Project.find()
-        .exec()
-        .then((project) => {
-            res.send([project.sort((p, q) => q.date - p.date)[0]])
-        })
-        .catch((err) => {
-            logger.error(err)
-            res.status(404).send()
-        })
-})
-
-module.exports = latest
+module.exports = require('express')
+    .Router()
+    .get('/', (req, res) => {
+        Project.find()
+            .exec()
+            .then((projects) => {
+                res.send([projects.sort((p, q) => q.date - p.date)[0]])
+            })
+            .catch((err) => {
+                logger.error(err)
+                res.status(404).send()
+            })
+    })
