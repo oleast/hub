@@ -61,19 +61,21 @@ export default class Projects extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Grid>
-                        <Grid.Column width={12}>
+                        <Grid.Column width={11}>
                             <Header color={this.state.accentColor} as='h1'>Featured Projects</Header>
                         </Grid.Column>
-                        <Grid.Column width={3} floated='right'>
+                        <Grid.Column width={4}>
                             <Dropdown
+                                fluid
                                 icon='exchange'
                                 labeled
                                 button
                                 className='icon'
                                 options={apiMethods}
                                 onChange={this.setApiMethod}
-                                value={this.state.apiSelected.value
-                            }/>
+                                defaultValue={this.state.apiSelected}
+                                value={this.state.apiSelected}
+                            />
                         </Grid.Column>
                         <Grid.Column width={1} floated='right'>
                             <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={

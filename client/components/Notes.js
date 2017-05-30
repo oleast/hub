@@ -61,18 +61,20 @@ export default class Notes extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Grid>
-                        <Grid.Column width={12}>
-                            <Header color={this.state.accentColor} as='h1'>Latest Notes </Header>
+                        <Grid.Column width={11}>
+                            <Header color={this.state.accentColor} as='h1'>Latest Note </Header>
                         </Grid.Column>
-                        <Grid.Column width={3} floated='right'>
+                        <Grid.Column width={4}>
                             <Dropdown
+                                fluid
                                 icon='exchange'
                                 labeled
                                 button
                                 className='icon'
                                 options={apiMethods}
                                 onChange={this.setApiMethod}
-                                value={this.state.apiSelected.value}
+                                defaultValue={this.state.apiSelected}
+                                value={this.state.apiSelected}
                             />
                         </Grid.Column>
                         <Grid.Column width={1} floated='right'>
