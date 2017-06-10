@@ -11,8 +11,15 @@ const express = require('express')
 const bodyparser = require('body-parser')
 const cookieparser = require('cookie-parser')
 const session = require('express-session')
-const logger = require('winston')
 const path = require('path')
+
+global.logger = require('winston')
+global.appRoot = path.resolve(__dirname)
+
+const models = require('./db/models')
+global.Blog = models.blogs
+global.Project = models.projects
+global.Note = models.notes
 
 const routes = require('./routes')
 
@@ -21,6 +28,7 @@ const routes = require('./routes')
 // ///////////////////////////////////////////////////
 
 const PORT = process.env.HUB_PORT || 8000
+const HOST = process.env.HUB_HOST || '0.0.0.0'
 const LOG_LEVEL = process.env.HUB_LOG_LEVEL || 'debug'
 
 // ///////////////////////////////////////////////////
@@ -42,7 +50,9 @@ logger.level = LOG_LEVEL
 
 app.use('/', routes)
 
-app.listen(PORT, () => logger.info('Hub server running on port ' + PORT))
+const db = require('./db')
+
+let server = app.listen(PORT, HOST, () => logger.info('Hub server running on: ' + HOST + ':' + PORT))
 
 // ///////////////////////////////////////////////////
 // End of file

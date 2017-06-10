@@ -2,6 +2,18 @@
 const featured = require('express').Router()
 
 featured.get('/', (req, res) => {
+    Project.find({'featured': true})
+        .exec()
+        .then((projects) => {
+            res.send(projects)
+        })
+        .catch((err) => {
+            logger.error(err)
+            res.status(404).send()
+        })
+})
+
+/*featured.get('/', (req, res) => {
     res.send(
         [
             {
@@ -27,6 +39,6 @@ featured.get('/', (req, res) => {
             }
         ]
     )
-})
+})*/
 
 module.exports = featured
