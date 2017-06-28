@@ -2,6 +2,7 @@
     ./webpack.config.js
 */
 const path = require('path')
+const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -22,5 +23,12 @@ module.exports = {
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [
+    HtmlWebpackPluginConfig,
+    new webpack.DefinePlugin({
+      'process.env':{
+        'GOOGLE_ANALYTICS_TOKEN': JSON.stringify(process.env.HUB_GOOGLE_ANALYTICS_TOKEN) || "NOT-A-GOOGLE-TOKEN"
+      }
+    })
+  ]
 }

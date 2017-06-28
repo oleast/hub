@@ -49,6 +49,9 @@ app.use(express.static('public'))
 logger.level = LOG_LEVEL
 
 app.use('/', routes)
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
 
 const db = require('./db')
 

@@ -9,6 +9,7 @@ import Header from './Header'
 import Projects from './Projects'
 import Blogs from './Blogs'
 import Footer from './Footer'
+import HubRouter from './HubRouter'
 
 export default class Hub extends Component {
 
@@ -27,15 +28,7 @@ export default class Hub extends Component {
 		return (
 			<div id="main">
 				<Header pageName={this.state.pageName}/>
-				<Notes accentColor={this.state.accentColor}/>
-				<Container>
-					<Divider />
-				</Container>
-				<Projects accentColor={this.state.accentColor}/>
-				<Container>
-					<Divider />
-				</Container>
-				<Blogs accentColor={this.state.accentColor}/>
+				<HubRouter accentColor={this.state.accentColor}/>
 				<Divider hidden />
 				<Footer />
 			</div>
