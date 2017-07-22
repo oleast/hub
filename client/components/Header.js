@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Menu, Icon, Container } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export default class Header extends Component {
 
@@ -7,43 +8,58 @@ export default class Header extends Component {
         super(props)
 
         this.state = {
-            pageName: 'Hub'
+            pageName: 'Hub',
+            activeItem: 'home'
         }
+
+        this.handleItemClick = this.handleItemClick.bind(this)
+    }
+
+    handleItemClick (e, { name }) {
+        console.log(name)
+        this.setState({ activeItem: name })
     }
 
     render() {
     const { activeItem } = this.state
-
     return (
-        <Menu stackable>
+        <Menu>
             <Container>
-            <Menu.Item>
+            <Menu.Item as={Link} to='/' active={activeItem === 'home'} color='blue' onClick={this.handleItemClick}>
                 <Icon disabled name='home' /> {this.props.pageName}
             </Menu.Item>
             <Menu.Item
-                name='features'
-                active={activeItem === 'features'}
-                onClick={this.handleItemClick}
-                >
-                <a href="/cv">CV</a>
-            </Menu.Item>
-            <Menu.Item
-                name='features'
-                active={activeItem === 'features'}
+                name='projects'
+                active={activeItem === 'projects'}
+                as={Link}
+                to='/projects'
+                color='blue'
                 onClick={this.handleItemClick}
                 >
                 Projects
             </Menu.Item>
-
             <Menu.Item
-                name='testimonials'
-                active={activeItem === 'testimonials'}
+                name='blogs'
+                active={activeItem === 'blogs'}
+                as={Link}
+                to='/blogs'
+                color='blue'
                 onClick={this.handleItemClick}
                 >
                 Blogs
             </Menu.Item>
 
             <Menu.Menu position='right'>
+                <Menu.Item 
+                    as={Link}
+                    to='https://stokkers.no/cv'
+                    name='cv'
+                    active={activeItem === 'cv'}
+                    color='blue'
+                    onClick={this.handleItemClick}
+                    >
+                    CV
+                </Menu.Item>
                 <Menu.Item
                     name='sign-in'
                     active={activeItem === 'sign-in'}

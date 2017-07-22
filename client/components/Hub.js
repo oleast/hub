@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import { Divider, Container } from 'semantic-ui-react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import axios from 'axios'
 
 // Import React Components
-import Notes from './Notes'
 import Header from './Header'
+import Footer from './Footer'
+//import Main from './Main'
+import Home from './Home'
+
 import Projects from './Projects'
 import Blogs from './Blogs'
-import Footer from './Footer'
+import Notes from './Notes'
 
 const style = {
 	content: {
@@ -29,8 +33,6 @@ export default class Hub extends Component {
 		this.state = {
 			pageName: 'Hub',
 			accentColor: 'blue',
-			projects: [],
-			blogs: []
 		}
 	}
 
@@ -39,19 +41,21 @@ export default class Hub extends Component {
 			<div id="main" style={style.site}>
 				<div style={style.content}>
 				<Header pageName={this.state.pageName}/>
-				<Notes accentColor={this.state.accentColor}/>
-				<Container>
-					<Divider />
-				</Container>
-				<Projects accentColor={this.state.accentColor}/>
-				<Container>
-					<Divider />
-				</Container>
-				<Blogs accentColor={this.state.accentColor}/>
-				<Divider hidden />
+				<Main />
 				</div>
 				<Footer />
 			</div>
 		)
 	}
 }
+
+const Main = () => (
+  <main>
+    <Switch>
+      <Route exact path='/' render={() => (<Home />)}/>
+      <Route path='/projects' render={() => (<Projects renderMode='all'/>)}/>
+	  <Route path='/blogs' render={() => (<Blogs renderMode='all' />)}/>
+	  <Route path='/notes' render={() => (<Notes renderMode='all' />)}/>
+    </Switch>
+  </main>
+)

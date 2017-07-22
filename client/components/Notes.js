@@ -74,7 +74,6 @@ export default class Notes extends Component {
                                     className='icon'
                                     options={apiMethods}
                                     onChange={this.setApiMethod}
-                                    defaultValue={this.state.apiSelected}
                                     value={this.state.apiSelected}
                                 />
                             </Grid.Column>
@@ -90,7 +89,7 @@ export default class Notes extends Component {
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row only='mobile tablet'>
-                            <Grid.Column width={12}>
+                            <Grid.Column width={6}>
                                 <Dropdown
                                     fluid
                                     icon='exchange'
@@ -99,11 +98,10 @@ export default class Notes extends Component {
                                     className='icon'
                                     options={apiMethods}
                                     onChange={this.setApiMethod}
-                                    defaultValue={this.state.apiSelected}
                                     value={this.state.apiSelected}
                                 />
                             </Grid.Column>
-                            <Grid.Column width={4} floated='right'  textAlign='right'>
+                            <Grid.Column width={10} floated='right'  textAlign='right'>
                                 <NoteModal accentColor={this.state.accentColor} getObj={this.getNotes} trigger={
                                     <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
                                 }/>
