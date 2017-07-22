@@ -10,6 +10,17 @@ import Projects from './Projects'
 import Blogs from './Blogs'
 import Footer from './Footer'
 
+const style = {
+	content: {
+		flex: '1'
+	},
+	site: {
+		display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
+    }
+}
+
 export default class Hub extends Component {
 
 	constructor (props) {
@@ -25,7 +36,8 @@ export default class Hub extends Component {
 
 	render () {
 		return (
-			<div id="main">
+			<div id="main" style={style.site}>
+				<div style={style.content}>
 				<Header pageName={this.state.pageName}/>
 				<Notes accentColor={this.state.accentColor}/>
 				<Container>
@@ -37,6 +49,7 @@ export default class Hub extends Component {
 				</Container>
 				<Blogs accentColor={this.state.accentColor}/>
 				<Divider hidden />
+				</div>
 				<Footer />
 			</div>
 		)

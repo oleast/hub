@@ -80,7 +80,7 @@ export default class Notes extends Component {
                             </Grid.Column>
                             <Grid.Column width={1} floated='right'>
                                 <NoteModal accentColor={this.state.accentColor} getObj={this.getNotes} trigger={
-                                    <Icon size='large' name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
+                                    <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
                                 }/>
                             </Grid.Column>
                         </Grid.Row>
