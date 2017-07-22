@@ -61,27 +61,54 @@ export default class Projects extends Component {
                 <Divider hidden/>
                 <Container text>
                     <Grid>
-                        <Grid.Column width={11}>
-                            <Header color={this.state.accentColor} as='h1'>Featured Projects</Header>
-                        </Grid.Column>
-                        <Grid.Column width={4}>
-                            <Dropdown
-                                fluid
-                                icon='exchange'
-                                labeled
-                                button
-                                className='icon'
-                                options={apiMethods}
-                                onChange={this.setApiMethod}
-                                defaultValue={this.state.apiSelected}
-                                value={this.state.apiSelected}
-                            />
-                        </Grid.Column>
-                        <Grid.Column width={1} floated='right'>
-                            <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={
-                                <Icon size='large' name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
-                            }/>
-                        </Grid.Column>
+                        <Grid.Row only='computer'>
+                            <Grid.Column width={11}>
+                                <Header color={this.state.accentColor} as='h1'>Featured Projects</Header>
+                            </Grid.Column>
+                            <Grid.Column width={4}>
+                                <Dropdown
+                                    fluid
+                                    icon='exchange'
+                                    labeled
+                                    button
+                                    className='icon'
+                                    options={apiMethods}
+                                    onChange={this.setApiMethod}
+                                    defaultValue={this.state.apiSelected}
+                                    value={this.state.apiSelected}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={1} floated='left'>
+                                <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={
+                                    <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
+                                }/>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row only='mobile tablet'>
+                            <Grid.Column width={16}>
+                                <Header color={this.state.accentColor} as='h1'>Featured Projects</Header>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row only='mobile tablet'>
+                            <Grid.Column width={12}>
+                                <Dropdown
+                                    fluid
+                                    icon='exchange'
+                                    labeled
+                                    button
+                                    className='icon'
+                                    options={apiMethods}
+                                    onChange={this.setApiMethod}
+                                    defaultValue={this.state.apiSelected}
+                                    value={this.state.apiSelected}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={4} floated='left' textAlign='right'>
+                                <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={
+                                    <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
+                                }/>
+                            </Grid.Column>
+                        </Grid.Row>
                     </Grid>
                     {this.state.projects.map((project) => 
                         <Project
