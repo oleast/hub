@@ -1,6 +1,6 @@
 module.exports = require('express')
     .Router()
-    .post('/', (req, res) => {
+    .post('/', requireAdmin, (req, res) => {
         console.log('Recieveing body: ' + JSON.stringify(req.body))
         Blog.create(req.body)
             .then((blog) => {

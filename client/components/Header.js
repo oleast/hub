@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import { Button, Menu, Icon, Container } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
+import Signin from './Signin'
+
 export default class Header extends Component {
 
     constructor (props) {
         super(props)
 
         this.state = {
+            admin: this.props.admin,
+            displayName: this.props.displayName,
             pageName: 'Hub',
             activeItem: 'home'
         }
@@ -20,8 +24,14 @@ export default class Header extends Component {
         this.setState({ activeItem: name })
     }
 
+    componentDidMount () {
+        this.props.getUser()
+    }
+
     render() {
-    const { activeItem } = this.state
+    const { activeItem, admin, displayName } = this.state
+
+    console.log(displayName)
     return (
         <Menu>
             <Container>
@@ -60,14 +70,15 @@ export default class Header extends Component {
                     >
                     CV
                 </Menu.Item>
-                <Menu.Item
-                    name='sign-in'
-                    active={activeItem === 'sign-in'}
-                    onClick={this.handleItemClick}
-                    >
-                    <Button primary>
-                        Sign in
-                    </Button>
+                { displayName ?
+                    <Menu.Item>
+                        { admin ? 'Admin | ' + displayName : displayName }
+                    </Menu.Item> : undefined
+                }
+                <Menu.Item>
+                    { !displayName ?
+                        <Signin getUser={ this.props.getUser.bind(this) }/> : <Button color='blue'>Sign out</Button>
+                    }
                 </Menu.Item>
             </Menu.Menu>
             </Container>

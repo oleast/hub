@@ -56,6 +56,8 @@ export default class Blogs extends Component {
     }
 
     render () {
+        const { admin } = this.props
+        console.log('Admin: ' + admin)
         return (
             <div id="blogs">
                 <Divider hidden/>
@@ -77,11 +79,13 @@ export default class Blogs extends Component {
                                     value={this.state.apiSelected}
                                 />
                             </Grid.Column>
-                            <Grid.Column width={1} floated='right'>
-                                <BlogModal accentColor={this.state.accentColor} getObj={this.getBlogs} trigger={
-                                    <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
-                                }/>
-                            </Grid.Column>
+                            { admin ?
+                                <Grid.Column width={1} floated='right'>
+                                    <BlogModal accentColor={this.state.accentColor} getObj={this.getBlogs} trigger={
+                                        <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
+                                    }/>
+                                </Grid.Column> : undefined
+                            }
                         </Grid.Row>
                         <Grid.Row only='mobile tablet'>
                             <Grid.Column width={16}>
@@ -110,6 +114,7 @@ export default class Blogs extends Component {
                     </Grid>
                     {this.state.blogs.map((blog) => 
                         <Blog
+                            admin={admin}
                             key={blog._id}
                             obj={blog}
                             getObj={this.getBlogs}

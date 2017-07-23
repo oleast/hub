@@ -44,6 +44,7 @@ export default class Blog extends Component {
     }
 
     render () {
+        const { admin } = this.props
         return (
             <Item.Group>
                 <Item>
@@ -60,7 +61,7 @@ export default class Blog extends Component {
                         </Item.Description>
                         <Item.Extra></Item.Extra>
 
-                        {this.state.showOptions ?
+                        { this.state.showOptions && admin ?
                             <div>
                                 <Divider />
                                 <Grid columns={3} centered divided>

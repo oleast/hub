@@ -7,17 +7,18 @@ import Blogs from './Blogs'
 
 export default class Home extends Component {
     render () {
+        const { admin } = this.props
         return (
             <div>
-                <Notes accentColor={ACCENT_COLOR}/>
+                <Notes admin={admin} accentColor={ACCENT_COLOR}/>
                 <Container>
                     <Divider />
                 </Container>
-                <Projects accentColor={ACCENT_COLOR}/>
+                <Projects admin={admin} accentColor={ACCENT_COLOR}/>
                 <Container>
                     <Divider />
                 </Container>
-                <Blogs accentColor={ACCENT_COLOR}/>
+                <Blogs admin={admin} accentColor={ACCENT_COLOR}/>
                 <Divider hidden />
             </div>
         )

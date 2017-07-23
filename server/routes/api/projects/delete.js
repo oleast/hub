@@ -1,7 +1,7 @@
 
 module.exports = require('express')
     .Router()
-    .post('/', (req, res) => {
+    .post('/', requireAdmin, (req, res) => {
         console.log('Recieveing body: ' + JSON.stringify(req.body))
         Project.remove({ _id:req.body.id })
             .then((project) => (err, project) => {

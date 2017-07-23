@@ -7,7 +7,7 @@ import axios from 'axios'
 // Import React Components
 import Header from './Header'
 import Footer from './Footer'
-//import Main from './Main'
+import Main from './Main'
 import Home from './Home'
 
 import Projects from './Projects'
@@ -33,15 +33,41 @@ export default class Hub extends Component {
 		this.state = {
 			pageName: 'Hub',
 			accentColor: 'blue',
+			admin: false,
+			displayName: undefined,
+			username: undefined
 		}
 	}
 
+	getUser () {
+		console.log('[Hub](getUser) Getting user..')
+		axios.get('/user')
+			.then((res) => {
+				if (res.data.user) {
+					console.log('[Hub](getUser) Got user')
+					this.setState({
+						admin: res.data.user.admin,
+						username: res.data.user.username,
+						displayName: res.data.user.displayName
+					})
+				} else if (!res.data.success) {
+					console.log('[Hub](getUser) Not logged in')
+				} else {
+					console.log('[Hub](getUser) Login Failure')
+				}
+			})
+			.catch((err) => {
+				console.error(err)
+			}) 
+	}
+
 	render () {
+		const { pageName, admin, username, displayName } = this.state
 		return (
 			<div id="main" style={style.site}>
 				<div style={style.content}>
-				<Header pageName={this.state.pageName}/>
-				<Main />
+				<Header pageName={pageName} admin={admin} displayName={displayName} getUser={this.getUser}/>
+				<Main admin={admin}/>
 				</div>
 				<Footer />
 			</div>
@@ -49,13 +75,3 @@ export default class Hub extends Component {
 	}
 }
 
-const Main = () => (
-  <main>
-    <Switch>
-      <Route exact path='/' render={() => (<Home />)}/>
-      <Route path='/projects' render={() => (<Projects renderMode='all'/>)}/>
-	  <Route path='/blogs' render={() => (<Blogs renderMode='all' />)}/>
-	  <Route path='/notes' render={() => (<Notes renderMode='all' />)}/>
-    </Switch>
-  </main>
-)
