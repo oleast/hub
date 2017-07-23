@@ -51,8 +51,8 @@ export default class Header extends Component {
 
             <Menu.Menu position='right'>
                 <Menu.Item 
-                    as={Link}
-                    to='https://stokkers.no/cv'
+                    as='a'
+                    href='/cv'
                     name='cv'
                     active={activeItem === 'cv'}
                     color='blue'
