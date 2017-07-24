@@ -47,7 +47,7 @@ export default class BlogModal extends Component {
         event.preventDefault()
         let form = this.state.form
         axios.post('/api/blogs/create/', form)
-        this.props.getObj()
+        this.props.getObjs()
         this.handleClose()
     }
 

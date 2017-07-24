@@ -24,15 +24,15 @@ export default class Projects extends Component {
             projects: []
         }
 
-        this.getProjects = this.getProjects.bind(this)
+        this.getObjs = this.getObjs.bind(this)
         this.setApiMethod = this.setApiMethod.bind(this)
     }
 
     componentWillMount () {
-        this.getProjects()
+        this.getObjs()
     }
 
-    getProjects () {
+    getObjs () {
         axios
 			.get('/api/projects/' + this.state.apiSelected)
 			.then(request => {
@@ -51,7 +51,7 @@ export default class Projects extends Component {
         this.setState({
             apiSelected: selected.value
         }, () => {
-            this.getProjects()
+            this.getObjs()
         })
     }
 
@@ -78,7 +78,7 @@ export default class Projects extends Component {
                                 />
                             </Grid.Column>
                             <Grid.Column width={1} floated='left'>
-                                <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={
+                                <ProjectModal accentColor={this.state.accentColor} getObjs={this.getObjs} trigger={
                                     <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
                                 }/>
                             </Grid.Column>
@@ -102,7 +102,7 @@ export default class Projects extends Component {
                                 />
                             </Grid.Column>
                             <Grid.Column width={10} floated='left' textAlign='right'>
-                                <ProjectModal accentColor={this.state.accentColor} getProjects={this.getProjects} trigger={
+                                <ProjectModal accentColor={this.state.accentColor} getObjs={this.getObjs} trigger={
                                     <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
                                 }/>
                             </Grid.Column>
@@ -111,8 +111,8 @@ export default class Projects extends Component {
                     {this.state.projects.map((project) => 
                         <Project
                             key={project._id}
-                            project={project}
-                            getProjects={this.getProjects}
+                            obj={project}
+                            getObjs={this.getObjs}
                             accentColor={this.state.accentColor}
                         />
                     )}

@@ -20,7 +20,7 @@ export default class NoteModal extends Component {
     }
 
     handleChange (event, {name, value}) {
-        console.log([name] + ' - ' + name + ' : ' + value)
+        console.log('[NoteModal](handleChange) ' + [name] + ' - ' + name + ' : ' + value)
         if (value === '') { value = undefined }
         let form = this.state.form
         form[name] = value
@@ -34,7 +34,7 @@ export default class NoteModal extends Component {
         event.preventDefault()
         let form = this.state.form
         axios.post('/api/notes/create/', form)
-        this.props.getObj()
+        this.props.getObjs()
         this.handleClose()
     }
 

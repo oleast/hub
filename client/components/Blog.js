@@ -12,8 +12,7 @@ export default class Blog extends Component {
         super(props)
 
         this.state = {
-            showOptions: false,
-            accentColor: props.accentColor
+            showOptions: false
         }
 
         this.deleteItem = this.deleteItem.bind(this)
@@ -23,8 +22,12 @@ export default class Blog extends Component {
     }
 
     deleteItem () {
-        axios.post('/api/blogs/delete', { id:this.props.obj._id })
-        this.props.getObj()
+        const requestUrl = '/api/blogs/delete'
+        const requestPayload = { id:this.props.obj._id }
+        console.log('[Blog](deleteItem) Posting: ' + requestUrl + ' With payload: ')
+        //console.log(requestPayload)
+        axios.post(requestUrl, requestPayload)
+        this.props.getObjs()
     }
 
     toggleShowOptions () {
@@ -34,34 +37,45 @@ export default class Blog extends Component {
     }
 
     feature () {
-        axios.post('/api/blogs/feature', { id:this.props.obj._id, featured: true})
-        this.props.getObj()
+        const requestUrl = '/api/blogs/feature'
+        const requestPayload = { id:this.props.obj._id, featured: true}
+        console.log('[Blog](feature) Posting: ' + requestUrl + ' With payload: ')
+        //console.log(requestPayload)
+        axios.post(requestUrl, requestPayload)
+        this.props.getObjs()
     }
 
     unFeature () {
-        axios.post('/api/blogs/feature', { id:this.props.obj._id, featured: false})
-        this.props.getObj()
+        const requestUrl = '/api/blogs/feature'
+        const requestPayload = { id:this.props.obj._id, featured: false}
+        console.log('[Blog](feature) Posting: ' + requestUrl + ' With payload: ')
+        //console.log(requestPayload)
+        axios.post(requestUrl, requestPayload)
+        this.props.getObjs()
     }
 
     render () {
-        const { admin } = this.props
+        const { showOptions } = this.state
+        const { admin, obj, accentColor } = this.props
         return (
             <Item.Group>
                 <Item>
-                    <Item.Image size='tiny' src={this.props.obj.image} />
+                    <Item.Image size='tiny' src={obj.image} />
 
                     <Item.Content>
-                        <Item.Header as='a'>{this.props.obj.title}</Item.Header>
+                        <Item.Header as='a'>{obj.title}</Item.Header>
                         <Item.Meta>
-                            <Icon size='large' name='settings' onClick={this.toggleShowOptions}/>
-                            {this.props.obj.date.getFormattedDate()}
+                            { admin ? 
+                                <Icon size='large' name='settings' onClick={this.toggleShowOptions}/> : undefined
+                            }
+                            {obj.date.getFormattedDate()}
                         </Item.Meta>
                         <Item.Description>
-                            {this.props.obj.content}
+                            {obj.content}
                         </Item.Description>
                         <Item.Extra></Item.Extra>
 
-                        { this.state.showOptions && admin ?
+                        { admin && showOptions ?
                             <div>
                                 <Divider />
                                 <Grid columns={3} centered divided>
@@ -69,12 +83,12 @@ export default class Blog extends Component {
                                         <Icon size='large' name='remove circle' color='red' onClick={this.deleteItem} />
                                     </Grid.Column>
                                     <Grid.Column>
-                                        <BlogModal accentColor={this.state.accentColor} getObj={this.props.getObj} trigger={
+                                        <BlogModal accentColor={accentColor} getObjs={getObjs} trigger={
                                             <Icon size='large' name='pencil' color='blue' onClick={this.handleOpen}/>
                                         } />
                                     </Grid.Column>
                                     <Grid.Column>
-                                        {this.props.obj.featured ?
+                                        {obj.featured ?
                                             <Icon size='large' name='star' color='purple' onClick={this.unFeature} /> :
                                             <Icon size='large' name='empty star' color='purple' onClick={this.feature} />
                                         }

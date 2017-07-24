@@ -37,6 +37,12 @@ export default class Hub extends Component {
 			displayName: undefined,
 			username: undefined
 		}
+
+		this.getUser = this.getUser.bind(this)
+	}
+
+	componentWillMount () {
+		this.getUser()
 	}
 
 	getUser () {
@@ -45,6 +51,7 @@ export default class Hub extends Component {
 			.then((res) => {
 				if (res.data.user) {
 					console.log('[Hub](getUser) Got user')
+					console.log(res.data.user)
 					this.setState({
 						admin: res.data.user.admin,
 						username: res.data.user.username,
@@ -62,12 +69,12 @@ export default class Hub extends Component {
 	}
 
 	render () {
-		const { pageName, admin, username, displayName } = this.state
+		const { pageName, admin, username, displayName, accentColor } = this.state
 		return (
 			<div id="main" style={style.site}>
 				<div style={style.content}>
-				<Header pageName={pageName} admin={admin} displayName={displayName} getUser={this.getUser}/>
-				<Main admin={admin}/>
+				<Header pageName={pageName} admin={admin} displayName={displayName} getUser={this.getUser} accentColor={accentColor}/>
+				<Main admin={admin} accentColor={accentColor} />
 				</div>
 				<Footer />
 			</div>
