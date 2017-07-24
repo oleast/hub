@@ -8,5 +8,6 @@ const Blogs = require('./Blogs')*/
 module.exports = {
     projects: require('./Projects'),
     notes: require('./Notes'),
-    blogs: require('./Blogs')
+    blogs: require('./Blogs'),
+    users: require('./Users')
 }

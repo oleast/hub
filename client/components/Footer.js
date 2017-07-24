@@ -21,17 +21,24 @@ export default class Header extends Component {
                 <Grid columns={3} relaxed>
                     <Grid.Column>
                         <Segment basic inverted>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                            <p>
+                                I don't really know what I should put here yet, do you?
+                            </p>
                         </Segment>
                     </Grid.Column>
                     <Grid.Column>
                         <Segment basic inverted>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                            <p>
+                                Made with <Icon size='small' name='heart'/> by Ole Anders Stokker (oleast).
+                                Feel free to contact me at olestokk(at)gmail(dot)com
+                            </p>
                         </Segment>
                     </Grid.Column>
                     <Grid.Column>
                         <Segment basic inverted>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+                            <p>
+                                <a href="https://github.com/oleast/hub"><Icon size='large' name='github'></Icon></a> | This project is open source and available on Github for any and everyone to look at and contribute to.
+                            </p>
                         </Segment>
                     </Grid.Column>
                 </Grid>

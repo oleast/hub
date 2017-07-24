@@ -3,8 +3,6 @@ let mongoose = require('mongoose')
 
 let Schema = mongoose.Schema
 
-console.log('Hello from blogs start')
-
 const Blog = new Schema (
 	{
 		title: { type: String, required: true , unique: true },
@@ -15,7 +13,5 @@ const Blog = new Schema (
 		date: { type: Date, default: Date.now }
 	}
 )
-
-console.log('Hello from blogs end')
 
 module.exports = mongoose.model('Blog', Blog)

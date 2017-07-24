@@ -56,35 +56,65 @@ export default class Blogs extends Component {
     }
 
     render () {
+        const { admin } = this.props
+        console.log('Admin: ' + admin)
         return (
             <div id="blogs">
                 <Divider hidden/>
                 <Container text>
                     <Grid>
-                        <Grid.Column width={11}>
-                            <Header color={this.state.accentColor} as='h1'>Featured Blogs </Header>
-                        </Grid.Column>
-                        <Grid.Column width={4}>
-                            <Dropdown
-                                fluid
-                                icon='exchange'
-                                labeled
-                                button
-                                className='icon'
-                                options={apiMethods}
-                                onChange={this.setApiMethod}
-                                defaultValue={this.state.apiSelected}
-                                value={this.state.apiSelected}
-                            />
-                        </Grid.Column>
-                        <Grid.Column width={1} floated='right'>
-                            <BlogModal accentColor={this.state.accentColor} getObj={this.getBlogs} trigger={
-                                <Icon size='large' name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
-                            }/>
-                        </Grid.Column>
+                        <Grid.Row only='computer'>
+                            <Grid.Column width={11}>
+                                <Header color={this.state.accentColor} as='h1'>Featured Blogs </Header>
+                            </Grid.Column>
+                            <Grid.Column width={4}>
+                                <Dropdown
+                                    fluid
+                                    icon='exchange'
+                                    labeled
+                                    button
+                                    className='icon'
+                                    options={apiMethods}
+                                    onChange={this.setApiMethod}
+                                    value={this.state.apiSelected}
+                                />
+                            </Grid.Column>
+                            { admin ?
+                                <Grid.Column width={1} floated='right'>
+                                    <BlogModal accentColor={this.state.accentColor} getObj={this.getBlogs} trigger={
+                                        <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
+                                    }/>
+                                </Grid.Column> : undefined
+                            }
+                        </Grid.Row>
+                        <Grid.Row only='mobile tablet'>
+                            <Grid.Column width={16}>
+                                <Header color={this.state.accentColor} as='h1'>Featured Blogs </Header>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row only='mobile tablet'>
+                            <Grid.Column width={6}>
+                                <Dropdown
+                                    fluid
+                                    icon='exchange'
+                                    labeled
+                                    button
+                                    className='icon'
+                                    options={apiMethods}
+                                    onChange={this.setApiMethod}
+                                    value={this.state.apiSelected}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={10} floated='right' textAlign='right'>
+                                <BlogModal accentColor={this.state.accentColor} getObj={this.getBlogs} trigger={
+                                    <Icon circular name='plus' color={this.state.accentColor} onClick={this.handleOpen}/>
+                                }/>
+                            </Grid.Column>
+                        </Grid.Row>
                     </Grid>
                     {this.state.blogs.map((blog) => 
                         <Blog
+                            admin={admin}
                             key={blog._id}
                             obj={blog}
                             getObj={this.getBlogs}
