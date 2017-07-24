@@ -20,7 +20,7 @@ export default class Header extends Component {
     }
 
     handleItemClick (e, { name }) {
-        console.log(name)
+        console.log('[Header](handleItemClick) Name: ' + name)
         this.setState({ activeItem: name })
     }
 
@@ -57,6 +57,16 @@ export default class Header extends Component {
                 onClick={this.handleItemClick}
                 >
                 Blogs
+            </Menu.Item>
+            <Menu.Item
+                name='notes'
+                active={activeItem === 'notes'}
+                as={Link}
+                to='/notes'
+                color='blue'
+                onClick={this.handleItemClick}
+                >
+                Notes
             </Menu.Item>
 
             <Menu.Menu position='right'>

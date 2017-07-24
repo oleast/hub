@@ -11,7 +11,6 @@ module.exports = function(passport) {
 
 	// used to serialize the user for the session
 	passport.serializeUser(function(user, done) {
-		console.log('serializeUser')
 		done(null, user.id)
 	})
 
@@ -31,20 +30,14 @@ module.exports = function(passport) {
 	passport.use('local-signup', new LocalStrategy({
 		usernameField : 'username',
 		passwordField : 'password',
-		passReqToCallback : true // allows us to pass back the entire request to the callback
+		passReqToCallback : true
 	},
 	function(req, username, password, done) {
-
-		console.log('passport-local-signup-function')
-
 		// find a user whose username is the same as the forms username
 		// we are checking to see if the user trying to login already exists
 		User.findOne({ 'local.username' :  username }, function(err, user) {
 			// if there are any errors, return the error
-			console.log('Username: ' + username)
-			console.log('passport-local-signup-function-findone')
 			if (err) {
-				console.log('passport-local-signup-function-findone-error')
 				console.log(err)
 				return done(err)
 			}
@@ -82,34 +75,25 @@ module.exports = function(passport) {
 
 		usernameField : 'username',
 		passwordField : 'password',
-		passReqToCallback : true // allows us to pass back the entire request to the callback
+		passReqToCallback : true
 	},
-	function(req, username, password, done) { // callback with username and password from our form
-		console.log('Username: ' + username)
-		console.log('passport-local-login-function')
+	function(req, username, password, done) {
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
 		User.findOne({ 'local.username' :  username }, (err, user) => {
 			// if there are any errors, return the error before anything else
-			console.log(username + ' :|: ' + user)
-			console.log('passport-local-login-function-findone')
 			if (err) {
-				console.log('passport-local-login-function-findone-error')
-				//console.error(err)
 				return done(err)
 			}
 			// if no user is found, return the message
             if (!user) {
-                console.log('Login attempt, user not found')
 				return done(null, false, { message: 'Unknown user ' + username })
 			}
 			// if the user is found but the password is wrong
             if (!user.validPassword(password)) {
-                console.log('Login attempt, wrong password')
 				return done(null, false, { message: 'Password doesn\'t match for user ' + username })
 			}
 			// all is well, return successful user
-			console.log('passport-local-login-function-findone-y')
 			return done(null, user)
 		})
 	}))

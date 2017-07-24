@@ -1,9 +1,10 @@
 
+// Import external
 import React, { Component } from 'react'
 import { Item, Image, Icon, Button, Grid, Divider, Label } from 'semantic-ui-react'
-
 import axios from 'axios'
 
+// Import internal
 import ProjectModal from './ProjectModal'
 
 export default class Project extends Component {
@@ -12,8 +13,7 @@ export default class Project extends Component {
         super(props)
 
         this.state = {
-            showOptions: false,
-            accentColor: props.accentColor
+            showOptions: false
         }
 
         this.deleteItem = this.deleteItem.bind(this)
@@ -23,8 +23,12 @@ export default class Project extends Component {
     }
 
     deleteItem () {
-        axios.post('/api/projects/delete', { id:this.props.project._id })
-        this.props.getProjects()
+        const requestUrl = '/api/projects/delete'
+        const requestPayload = { id:this.props.obj._id }
+        console.log('[Project](deleteItem) Posting: ' + requestUrl + ' With payload: ')
+        //console.log(requestPayload)
+        axios.post(requestUrl, requestPayload)
+        this.props.getObjs()
     }
 
     toggleShowOptions () {
@@ -34,33 +38,46 @@ export default class Project extends Component {
     }
 
     feature () {
-        axios.post('/api/projects/feature', { id:this.props.project._id, featured: true})
-        this.props.getProjects()
+        const requestUrl = '/api/projects/feature'
+        const requestPayload = { id:this.props.obj._id, featured: true}
+        console.log('[Project](feature) Posting: ' + requestUrl + ' With payload: ')
+        //console.log(requestPayload)
+        axios.post(requestUrl, requestPayload)
+        this.props.getObjs()
     }
 
     unFeature () {
-        axios.post('/api/projects/feature', { id:this.props.project._id, featured: false})
-        this.props.getProjects()
+        const requestUrl = '/api/projects/feature'
+        const requestPayload = { id:this.props.obj._id, featured: false}
+        console.log('[Project](feature) Posting: ' + requestUrl + ' With payload: ')
+        //console.log(requestPayload)
+        axios.post(requestUrl, requestPayload)
+        this.props.getObjs()
     }
 
     render() {
+        const { showOptions } = this.state
+        const { obj, admin, accentColor } = this.props
+
         return (
             <Item.Group>
                 <Item>
-                    <Item.Image size='tiny' src={this.props.project.image} />
+                    <Item.Image size='tiny' src={obj.image} />
                     <Item.Content>
-                        <Item.Header as='a'>{this.props.project.name}</Item.Header>
+                        <Item.Header as='a'>{obj.name}</Item.Header>
                         <Item.Meta>
-                            <Icon size='large' name='settings' onClick={this.toggleShowOptions}/>
-                            {this.props.project.source ? <a href={this.props.project.source}><Icon size='large' name='github'/></a> : ''}
-                            {this.props.project.url ? <a href={this.props.project.url}>{this.props.project.url.replace('https://', '').replace('http://', '')}</a> : ''}
+                            { admin ?
+                                <Icon size='large' name='settings' onClick={this.toggleShowOptions}/> : undefined
+                            }
+                            {obj.source ? <a href={obj.source}><Icon size='large' name='github'/></a> : ''}
+                            {obj.url ? <a href={obj.url}>{obj.url.replace('https://', '').replace('http://', '')}</a> : ''}
                         </Item.Meta>
                         <Item.Description>
-                            {this.props.project.description}
+                            {obj.description}
                         </Item.Description>
-                        {this.props.project.tags ? <Item.Extra>{this.props.project.tags.map((tag) => <Label key={tag}>{tag}</Label>) }</Item.Extra> : ''}
+                        {obj.tags ? <Item.Extra>{obj.tags.map((tag) => <Label key={tag}>{tag}</Label>) }</Item.Extra> : ''}
                         
-                        {this.state.showOptions ?
+                        { admin && showOptions ?
                             <div>
                                 <Divider />
                                 <Grid columns={3} centered divided>
@@ -68,12 +85,12 @@ export default class Project extends Component {
                                         <Icon size='large' name='remove circle' color='red' onClick={this.deleteItem} />
                                     </Grid.Column>
                                     <Grid.Column>
-                                        <ProjectModal accentColor={this.state.accentColor} getProjects={this.props.getProjects} trigger={
+                                        <ProjectModal accentColor={accentColor} getObjs={this.props.getObjs} trigger={
                                             <Icon size='large' name='pencil' color='blue' onClick={this.handleOpen}/>
                                         } />
                                     </Grid.Column>
                                     <Grid.Column>
-                                        {this.props.project.featured ?
+                                        {obj.featured ?
                                             <Icon size='large' name='star' color='purple' onClick={this.unFeature} /> :
                                             <Icon size='large' name='empty star' color='purple' onClick={this.feature} />
                                         }
