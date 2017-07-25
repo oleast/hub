@@ -13,6 +13,8 @@ const cookieparser = require('cookie-parser')
 const session = require('express-session')
 const path = require('path')
 const passport = require('passport')
+//const universalAnalytics = require('universal-analytics')
+const expressGa = require('express-ga-middleware')
 
 global.logger = require('winston')
 global.appRoot = path.resolve(__dirname)
@@ -34,6 +36,7 @@ const HOST = process.env.HUB_HOST || '0.0.0.0'
 const LOG_LEVEL = process.env.HUB_LOG_LEVEL || 'debug'
 const ENV = process.env.HUB_ENV || 'development'
 const SECRET = process.env.HUB_SECRET || 'MagicalNarwhalsAndPinkOrcasDancingTogetherInImaginationLand'
+const GA_TOKEN = process.env.HUB_GA_TOKEN || ''
 
 // ///////////////////////////////////////////////////
 // Initial Server Setup
@@ -63,6 +66,9 @@ app.use(express.static('public'))
 require('./passport')(passport)
 app.use(passport.initialize())
 app.use(passport.session())
+//app.use(universalAnalytics.middleware(GA_TOKEN, {cookieName: '_ga'}))
+app.use(expressGa(GA_TOKEN))
+
 
 // Adjust the log level via environment variable
 logger.level = LOG_LEVEL

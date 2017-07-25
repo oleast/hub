@@ -10,8 +10,6 @@ export default class Header extends Component {
         super(props)
 
         this.state = {
-            admin: this.props.admin,
-            displayName: this.props.displayName,
             pageName: 'Hub',
             activeItem: 'home'
         }
@@ -29,14 +27,15 @@ export default class Header extends Component {
     }
 
     render() {
-    const { activeItem, admin, displayName } = this.state
+    const { activeItem } = this.state
+    const { pageName, displayName, admin } = this.props
 
     console.log(displayName)
     return (
         <Menu>
             <Container>
             <Menu.Item as={Link} to='/' active={activeItem === 'home'} color='blue' onClick={this.handleItemClick}>
-                <Icon disabled name='home' /> {this.props.pageName}
+                <Icon disabled name='home' /> {pageName}
             </Menu.Item>
             <Menu.Item
                 name='projects'

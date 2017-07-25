@@ -44,7 +44,7 @@ routes.get('/user', (req, res) => {
             }
         })
     } else {
-        res.status(401).json({success: false})
+        res.json({success: false})
     }
 })
 
