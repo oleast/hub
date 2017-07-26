@@ -16,5 +16,6 @@ projects.use('/create', create)
 projects.use('/latest', latest)
 projects.use('/delete', del)
 projects.use('/feature', feature)
+projects.use('/single', require('./single'))
 
 module.exports = projects

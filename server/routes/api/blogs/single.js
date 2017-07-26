@@ -1,11 +1,11 @@
 
 module.exports = require('express')
     .Router()
-    .get('/', (req, res) => {
-        Blog.findOne({ _id: req.body.id })
+    .get('/:id', (req, res) => {
+        Blog.findOne({ _id: req.params.id })
             .exec()
             .then((blog) => {
-                res.send([blog])
+                res.send(blog)
             })
             .catch((err) => {
                 logger.error(err)

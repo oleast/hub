@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { Item, Image, Icon, Button, Grid, Divider } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 
@@ -35,9 +36,9 @@ export default class Blog extends Component {
     }
 
     render () {
-
         const { showOptions } = this.state
         const { obj, admin, accentColor } = this.props
+        const link = '/note/' + obj._id
 
         return (
             <Item.Group>
@@ -45,7 +46,7 @@ export default class Blog extends Component {
                     <Item.Image size='tiny' src={obj.image} />
 
                     <Item.Content>
-                        <Item.Header as='a'>{obj.title}</Item.Header>
+                        <Item.Header><Link to={link}>{obj.title}</Link></Item.Header>
                         <Item.Meta>
                             { admin ?
                                 <Icon size='large' name='settings' onClick={this.toggleShowOptions}/> : undefined

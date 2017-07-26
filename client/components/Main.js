@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom'
 // Import internal
 import Home from './Home'
 import ObjContainer from './ObjContainer'
+import ObjSingle from './ObjSingle'
 import NoteModal from './NoteModal'
 import Note from './Note'
 import ProjectModal from './ProjectModal'
@@ -28,6 +29,9 @@ export default class Main extends Component {
                     <Route accentColor={accentColor} admin={admin} path='/projects' render={ProjectWrapper}/>
                     <Route accentColor={accentColor} admin={admin} path='/blogs' render={BlogWrapper}/>
                     <Route accentColor={accentColor} admin={admin} path='/notes' render={NoteWrapper}/>
+                    <Route accentColor={accentColor} admin={admin} path='/project/:id' render={ProjectWrapperS}/>
+                    <Route accentColor={accentColor} admin={admin} path='/blog/:id' render={BlogWrapperS}/>
+                    <Route accentColor={accentColor} admin={admin} path='/note/:id' render={NoteWrapperS}/>
                 </Switch>
             </main>
         )
@@ -50,4 +54,16 @@ const NoteWrapper = (props) => (
     <ObjContainer admin={props.admin} renderMode='all' ObjModal={NoteModal} Obj={Note} key='notes' objName='notes' accentColor={props.accentColor}>
         <div className='NoteHack' />
     </ObjContainer>
+)
+
+const ProjectWrapperS = ({ admin, accentColor, match }) => (
+    <ObjSingle admin={admin} Obj={Project} key='note' objName='projects' accentColor={accentColor} id={match.params.id} showAll={true} />
+)
+
+const BlogWrapperS = ({ admin, accentColor, match }) => (
+    <ObjSingle admin={admin} Obj={Blog} key='blog' objName='blogs' accentColor={accentColor} id={match.params.id} showAll={true} />
+)
+
+const NoteWrapperS = ({ admin, accentColor, match }) => (
+    <ObjSingle admin={admin} Obj={Note} key='note' objName='notes' accentColor={accentColor} id={match.params.id} showAll={true} />
 )

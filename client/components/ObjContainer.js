@@ -5,10 +5,6 @@ import { Segment, Container, Header, Divider, Icon, Dropdown, Grid } from 'seman
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-// Import internal
-import Project from './Project'
-import ProjectModal from './ProjectModal'
-
 // Declare methods for API get requests
 const apiMethods = [
     {key:'featured', text: 'Featured', value: 'featured'},
