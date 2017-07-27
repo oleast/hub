@@ -58,7 +58,7 @@ export default class Blog extends Component {
     render () {
         const { showOptions } = this.state
         const { admin, obj, accentColor } = this.props
-        const link = '/blog/' + obj._id
+        const link = '/blog/' + obj.slug
 
         return (
             <Item.Group>

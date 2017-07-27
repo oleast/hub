@@ -58,7 +58,7 @@ export default class Project extends Component {
     render() {
         const { showOptions } = this.state
         const { obj, admin, accentColor } = this.props
-        const link = '/project/' + obj._id
+        const link = '/project/' + obj.slug
 
         return (
             <Item.Group>

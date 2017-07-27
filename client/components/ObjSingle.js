@@ -23,8 +23,8 @@ export default class ObjSingle extends Component {
 
     getObj () {
         const { objName } = this.state
-        const { id } = this.props
-        const requestUrl = '/api/' + objName + '/single/' + id
+        const { slug } = this.props
+        const requestUrl = '/api/' + objName + '/single-slug/' + slug
         console.log('[ObjSingle](getObj) Getting: ' + requestUrl)
         axios
 			.get(requestUrl)
