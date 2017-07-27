@@ -106,7 +106,7 @@ export default class ObjContainer extends Component {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                    {this.state.objs.sort((d1, d2) => new Date(d1) - new Date(d2)).map((obj) => 
+                    {this.state.objs.sort((d1, d2) => new Date(d1) - new Date(d2)).reverse().map((obj) => 
                         <Obj
                             admin={admin}
                             key={obj._id}
