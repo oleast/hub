@@ -15,5 +15,6 @@ notes.use('/single', single)
 notes.use('/latest', latest)
 notes.use('/create', create)
 notes.use('/delete', del)
+notes.use('/single-slug', require('./single-slug'))
 
 module.exports = notes

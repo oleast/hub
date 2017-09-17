@@ -1,11 +1,11 @@
 
 module.exports = require('express')
     .Router()
-    .get('/:id', (req, res) => {
-        Project.findOne({ _id: req.params.id })
+    .get('/:slug', (req, res) => {
+        Note.findOne({ slug: req.params.slug })
             .exec()
-            .then((project) => {
-                res.send(project)
+            .then((note) => {
+                res.send(note)
             })
             .catch((err) => {
                 logger.error(err)

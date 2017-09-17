@@ -5,10 +5,6 @@ import { Segment, Container, Header, Divider, Icon, Dropdown, Grid } from 'seman
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-// Import internal
-import Project from './Project'
-import ProjectModal from './ProjectModal'
-
 // Declare methods for API get requests
 const apiMethods = [
     {key:'featured', text: 'Featured', value: 'featured'},
@@ -110,7 +106,7 @@ export default class ObjContainer extends Component {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                    {this.state.objs.map((obj) => 
+                    {this.state.objs.sort((d1, d2) => new Date(d1) - new Date(d2)).reverse().map((obj) => 
                         <Obj
                             admin={admin}
                             key={obj._id}

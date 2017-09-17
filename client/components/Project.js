@@ -2,7 +2,7 @@
 // Import external
 import React, { Component } from 'react'
 import { Item, Image, Icon, Button, Grid, Divider, Label } from 'semantic-ui-react'
-import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 // Import internal
 import ProjectModal from './ProjectModal'
@@ -58,13 +58,14 @@ export default class Project extends Component {
     render() {
         const { showOptions } = this.state
         const { obj, admin, accentColor } = this.props
+        const link = '/project/' + obj.slug
 
         return (
             <Item.Group>
                 <Item>
                     <Item.Image size='tiny' src={obj.image} />
                     <Item.Content>
-                        <Item.Header as='a'>{obj.name}</Item.Header>
+                        <Item.Header><Link to={link}>{obj.name}</Link></Item.Header>
                         <Item.Meta>
                             { admin ?
                                 <Icon size='large' name='settings' onClick={this.toggleShowOptions}/> : undefined

@@ -19,5 +19,6 @@ blogs.use('/create', create)
 blogs.use('/latest', latest)
 blogs.use('/feature', feature)
 blogs.use('/delete', del)
+blogs.use('single-slug', require('./single-slug'))
 
 module.exports = blogs
