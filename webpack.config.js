@@ -27,7 +27,7 @@ module.exports = {
     HtmlWebpackPluginConfig,
     new webpack.DefinePlugin({
       'process.env':{
-        'GA_TOKEN': JSON.stringify(process.env.HUB_GA_TOKEN) || ""
+        'GA_TOKEN': JSON.stringify(process.env.HUB_GA_TOKEN) || "'no-token'"
       }
     })
   ]

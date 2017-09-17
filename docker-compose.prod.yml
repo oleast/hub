@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  mongo:  
+    image: mongo:latest
+    volumes:
+      - /data/db
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: hub
+    depends_on:
+      - mongo
+    ports:
+      - "8000:8000"
+      - "8052:8052"
+    volumes:
+      - .:/srv/app
+    command: npm start
+    environment:
+      - HUB_DB_HOST=mongo
+      - HUB_PORT=8052
+      - HUB_HOST
+    tty: true
+    stdin_open: true
+ 
